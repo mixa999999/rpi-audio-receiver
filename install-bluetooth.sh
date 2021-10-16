@@ -22,6 +22,10 @@ EOF
 # Make Bluetooth discoverable after initialisation
 mkdir -p /etc/systemd/system/bthelper@.service.d
 cat <<'EOF' > /etc/systemd/system/bthelper@.service.d/override.conf
+[Unit]
+Description=Bluetooth helper
+Requires=bluetooth.service
+After=bluetooth.service
 [Service]
 Type=oneshot
 ExecStartPost=/usr/bin/bluetoothctl discoverable on
